@@ -35,6 +35,26 @@ export default {
             type: 'text',
         },
         {
+            name: 'mainMenu',
+            title: 'Ana Menü',
+            type: 'array',
+            of: [
+                {
+                    type: 'object',
+                    fields: [
+                        { name: 'label', title: 'Menü Adı', type: 'string' },
+                        { name: 'link', title: 'Link (veya Sayfa Seçin)', type: 'string' },
+                        {
+                            name: 'pageReference',
+                            title: 'Sayfa Bağlantısı',
+                            type: 'reference',
+                            to: [{ type: 'page' }, { type: 'service' }]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
             name: 'socialLinks',
             title: 'Sosyal Medya Linkleri',
             type: 'array',

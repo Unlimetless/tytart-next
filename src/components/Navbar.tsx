@@ -5,7 +5,13 @@ import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 
-const Navbar = () => {
+interface NavLink {
+    label: string;
+    link?: string;
+    slug?: string;
+}
+
+const Navbar = ({ menuItems }: { menuItems?: NavLink[] }) => {
     const [scrolled, setScrolled] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
 
@@ -17,11 +23,19 @@ const Navbar = () => {
         return () => window.removeEventListener('scroll', handleScroll)
     }, [])
 
-    const navLinks = [
-        { name: 'Hizmetlerimiz', href: '#hizmetler' },
-        { name: 'Projelerimiz', href: '#projeler' },
-        { name: 'İletişim', href: '#iletisim' },
+    const defaultLinks = [
+        { label: 'Hizmetlerimiz', link: '/hizmetler' },
+        { label: 'Projelerimiz', link: '/#projeler' },
+        { label: 'Yazılar', link: '/yazilar' },
+        { label: 'İletişim', link: '/#iletisim' },
     ]
+
+    const links = menuItems && menuItems.length > 0 ? menuItems : defaultLinks
+
+    const getLinkHref = (link: NavLink) => {
+        if (link.slug) return `/${link.slug}`
+        return link.link || '#'
+    }
 
     return (
         <motion.nav
@@ -35,9 +49,9 @@ const Navbar = () => {
                 </Link>
 
                 <div className="hidden md:flex items-center space-x-10 text-xs font-medium uppercase tracking-widest text-zinc-400">
-                    {navLinks.map((link) => (
-                        <Link key={link.name} href={link.href} className="hover:text-primary transition-colors">
-                            {link.name}
+                    {links.map((link) => (
+                        <Link key={link.label} href={getLinkHref(link)} className="hover:text-primary transition-colors">
+                            {link.label}
                         </Link>
                     ))}
                 </div>
@@ -65,14 +79,14 @@ const Navbar = () => {
                         className="md:hidden mt-4 glass rounded-2xl overflow-hidden"
                     >
                         <div className="p-8 flex flex-col space-y-6 text-center">
-                            {navLinks.map((link) => (
+                            {links.map((link) => (
                                 <Link
-                                    key={link.name}
-                                    href={link.href}
+                                    key={link.label}
+                                    href={getLinkHref(link)}
                                     onClick={() => setIsOpen(false)}
                                     className="text-sm font-medium uppercase tracking-widest text-zinc-300 hover:text-primary"
                                 >
-                                    {link.name}
+                                    {link.label}
                                 </Link>
                             ))}
                             <button className="bg-primary text-secondary px-6 py-4 rounded-xl text-xs font-bold uppercase tracking-wider">
