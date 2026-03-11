@@ -7,13 +7,14 @@ export default {
             name: 'title',
             title: 'Proje Başlığı',
             type: 'string',
-            validation: (Rule: any) => Rule.required()
+            validation: (Rule: any) => Rule.required(),
         },
         {
             name: 'slug',
             title: 'Slug',
             type: 'slug',
-            options: { source: 'title' }
+            options: { source: 'title' },
+            validation: (Rule: any) => Rule.required(),
         },
         {
             name: 'description',
@@ -32,9 +33,10 @@ export default {
             type: 'string',
             options: {
                 list: [
-                    { title: 'Lüks İnşaat', value: 'insaat' },
-                    { title: 'Premium Tadilat', value: 'tadilat' },
-                    { title: 'İç Mimari & Dekorasyon', value: 'dekorasyon' },
+                    { title: 'Tadilat', value: 'Tadilat' },
+                    { title: 'İnşaat', value: 'İnşaat' },
+                    { title: 'Dekorasyon', value: 'Dekorasyon' },
+                    { title: 'Mimari Tasarım', value: 'Mimari Tasarım' },
                 ],
             },
         },
@@ -42,7 +44,12 @@ export default {
             name: 'featured',
             title: 'Öne Çıkan Proje',
             type: 'boolean',
-            initialValue: false
+            initialValue: false,
+        },
+        {
+            name: 'seo',
+            title: 'SEO Ayarları',
+            type: 'seo'
         }
     ],
 }

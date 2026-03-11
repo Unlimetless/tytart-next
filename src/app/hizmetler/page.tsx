@@ -2,6 +2,7 @@ import { client } from '@/sanity/lib/client'
 import { allServicesQuery } from '@/sanity/lib/queries'
 import Link from 'next/link'
 import Image from 'next/image'
+import { urlFor } from '@/sanity/lib/image'
 import { motion } from 'framer-motion'
 import * as LucideIcons from 'lucide-react'
 
@@ -23,15 +24,18 @@ export default async function ServicesPage() {
                         const Icon = (LucideIcons as any)[service.icon] || LucideIcons.HardHat;
                         return (
                             <Link
-                                key={service.slug.current}
-                                href={`/hizmetler/${service.slug.current}`}
-                                className="glass p-12 rounded-3xl hover:border-primary/30 transition-all duration-500 group"
+                                key={service.slug?.current || Math.random()}
+                                href={service.slug?.current ? `/hizmetler/${service.slug.current}` : '#'}
+                                className="glass p-10 rounded-[2.5rem] hover:border-primary/40 transition-all duration-500 group"
                             >
-                                <div className="mb-8 p-4 bg-white/5 w-fit rounded-2xl group-hover:bg-primary/10 transition-colors">
-                                    <Icon className="text-primary" size={40} />
+                                <div className="mb-8 w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center group-hover:bg-primary/20 transition-all">
+                                    <Icon className="text-primary" size={32} />
                                 </div>
-                                <h3 className="text-2xl font-bold text-white mb-6 tracking-tight">{service.title}</h3>
-                                <p className="text-zinc-400 leading-relaxed font-light">{service.description}</p>
+                                <h2 className="text-2xl font-bold text-white mb-4 group-hover:text-primary transition-colors">{service.title}</h2>
+                                <p className="text-zinc-400 font-light leading-relaxed mb-8">{service.description}</p>
+                                <div className="text-xs font-bold text-white uppercase tracking-widest flex items-center group-hover:translate-x-2 transition-transform">
+                                    Detaylar <LucideIcons.ArrowRight size={14} className="ml-2" />
+                                </div>
                             </Link>
                         )
                     })}

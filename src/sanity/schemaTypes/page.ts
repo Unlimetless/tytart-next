@@ -20,7 +20,33 @@ export default {
             name: 'content',
             title: 'İçerik',
             type: 'array',
-            of: [{ type: 'block' }, { type: 'image' }]
+            of: [
+                {
+                    type: 'block',
+                    marks: {
+                        annotations: [
+                            {
+                                name: 'link',
+                                type: 'object',
+                                title: 'Link',
+                                fields: [
+                                    {
+                                        name: 'href',
+                                        type: 'url',
+                                        title: 'URL'
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                { type: 'image', options: { hotspot: true } }
+            ]
+        },
+        {
+            name: 'seo',
+            title: 'SEO Ayarları',
+            type: 'seo'
         }
     ]
 }

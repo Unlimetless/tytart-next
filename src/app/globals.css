@@ -2,15 +2,16 @@
 
 @theme {
   --color-primary: #ecb613;
-  /* Soft Gold */
-  --color-secondary: #1a1a1a;
-  /* Deep Charcoal */
-  --color-accent: #f5f5f5;
-  /* Off-White */
+  /* Premium Gold */
+  --color-secondary: #222226;
+  /* Refined Charcoal */
+  --color-accent: #f8f9fa;
+  /* Elegant Off-White */
+  --color-background-soft: #1a1a1e;
 }
 
 :root {
-  --background: #121212;
+  --background: #16161a;
   --foreground: #f5f5f5;
   --font-primary: 'Outfit', sans-serif;
   --font-secondary: 'Playfair Display', serif;

@@ -32,7 +32,12 @@ export default {
             name: 'body',
             title: 'İçerik',
             type: 'array',
-            of: [{ type: 'block' }, { type: 'image' }]
+            of: [{ type: 'block' }, { type: 'image', options: { hotspot: true } }]
+        },
+        {
+            name: 'seo',
+            title: 'SEO Ayarları',
+            type: 'seo'
         }
     ]
 }

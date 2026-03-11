@@ -2,29 +2,74 @@ import { groq } from 'next-sanity'
 
 export const siteSettingsQuery = groq`*[_type == "siteSettings"][0]{
   title,
-  description,
-  logo,
+  logoMain,
+  logoRetina,
+  logoMobile,
+  logoSticky,
   phone,
+  whatsapp,
   email,
   address,
-  mainMenu[]{
+  googleMapsIframe,
+  socialLinks,
+  seoGlobals
+}`
+
+export const headerSettingsQuery = groq`*[_type == "headerSettings"][0]{
+  backgroundColor,
+  stickyBackgroundColor,
+  isTransparent,
+  textColor,
+  "whatsappIcon": whatsappIcon.asset->url
+}`
+
+export const navigationQuery = groq`*[_type == "navigation" && _id == "mainNavigation"][0]{
+  items[]{
     label,
-    link,
-    "slug": pageReference->slug.current
+    type,
+    "slug": reference->slug.current,
+    url,
+    children[]{
+      label,
+      "slug": reference->slug.current
+    },
+    isButton,
+    buttonStyle
   },
-  socialLinks
+  styling
+}`
+
+export const homePageQuery = groq`*[_type == "homePage"][0]{
+  ...,
+  heroImage,
+  aboutImage,
+  featuredServices[]->{
+    title,
+    slug,
+    description,
+    icon,
+    image
+  },
+  featuredProjects[]->{
+    title,
+    slug,
+    image,
+    category
+  }
 }`
 
 export const pageBySlugQuery = groq`*[_type == "page" && slug.current == $slug][0]{
   title,
-  content
+  content,
+  seo
 }`
 
 export const serviceBySlugQuery = groq`*[_type == "service" && slug.current == $slug][0]{
   title,
   content,
   image,
-  description
+  description,
+  seo
 }`
 
 export const allServicesQuery = groq`*[_type == "service"]{
@@ -47,5 +92,6 @@ export const postBySlugQuery = groq`*[_type == "post" && slug.current == $slug][
   title,
   mainImage,
   publishedAt,
-  body
+  body,
+  seo
 }`
