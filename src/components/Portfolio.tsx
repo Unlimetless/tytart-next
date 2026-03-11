@@ -9,9 +9,9 @@ import Image from 'next/image'
 
 const Portfolio = ({ projects }: { projects?: any[] }) => {
     const defaultProjects = [
-        { title: 'Modern Villa Restorasyonu', category: 'Tadilat', image: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=2071' },
-        { title: 'Lüks Rezidans Tasarımı', category: 'Mimari Tasarım', image: 'https://images.unsplash.com/photo-1600585154340-be6199fbfd00?q=80&w=2070' },
-        { title: 'Kurumsal Ofis Projesi', category: 'Dekorasyon', image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069' },
+        { title: 'Modern Villa Restorasyonu', category: 'Tadilat', image: 'https://images.unsplash.com/photo-1600566752355-35792bedcfea?q=80&w=2000' },
+        { title: 'Lüks Rezidans Tasarımı', category: 'Mimari Tasarım', image: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=2000' },
+        { title: 'Kurumsal Ofis Projesi', category: 'Dekorasyon', image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2000' },
     ]
 
     const items = projects && projects.length > 0 ? projects : defaultProjects;

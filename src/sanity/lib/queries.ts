@@ -20,6 +20,7 @@ export const headerSettingsQuery = groq`*[_type == "headerSettings"][0]{
   stickyBackgroundColor,
   isTransparent,
   textColor,
+  stickyTextColor,
   "whatsappIcon": whatsappIcon.asset->url
 }`
 

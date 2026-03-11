@@ -24,6 +24,7 @@ interface HeaderSettings {
     stickyBackgroundColor?: string;
     isTransparent?: boolean;
     textColor?: string;
+    stickyTextColor?: string;
     whatsappIcon?: string;
 }
 
@@ -58,28 +59,57 @@ const Navbar = ({ menuItems, settings, styling, headerSettings }: {
     }
 
     const renderLogo = () => {
-        const logo = scrolled ? settings?.logoSticky : settings?.logoMain;
-        if (logo) {
+        const logoMain = settings?.logoMain
+        const logoSticky = settings?.logoSticky
+        const logoMobile = settings?.logoMobile
+        const logoRetina = settings?.logoRetina
+
+        // Logo Seçimi
+        const currentLogo = scrolled ? (logoSticky || logoMain) : logoMain
+
+        if (!currentLogo) {
             return (
-                <Image
-                    src={urlFor(logo).url()}
-                    alt={settings?.title || "TytArt"}
-                    width={150}
-                    height={50}
-                    className="h-10 w-auto object-contain"
-                />
+                <span className="text-2xl font-bold tracking-tighter text-white">
+                    Tyt<span className="text-primary">Art</span>
+                </span>
             )
         }
+
+        const logoUrl = urlFor(currentLogo).url()
+
         return (
-            <span className="text-2xl font-bold tracking-tighter text-white">
-                Tyt<span className="text-primary">Art</span>
-            </span>
+            <div className="flex items-center">
+                {/* Masaüstü Logo */}
+                <div className={`relative h-10 md:h-12 w-48 ${logoMobile ? 'hidden md:block' : 'block'}`}>
+                    <Image
+                        src={logoUrl}
+                        alt={settings?.title || "TytArt"}
+                        fill
+                        className="object-contain transition-all duration-300"
+                        priority
+                    />
+                </div>
+                {/* Mobil Logo (Eğer varsa) */}
+                {logoMobile && (
+                    <div className="relative h-8 w-32 md:hidden">
+                        <Image
+                            src={urlFor(scrolled ? (logoSticky || logoMobile) : logoMobile).url()}
+                            alt={settings?.title || "TytArt"}
+                            fill
+                            className="object-contain"
+                            priority
+                        />
+                    </div>
+                )}
+            </div>
         )
     }
 
     const navStyle = {
         fontSize: styling?.fontSize ? `${styling.fontSize}px` : '14px',
-        color: headerSettings?.textColor || styling?.textColor || '#ffffff'
+        color: scrolled
+            ? (headerSettings?.stickyTextColor || headerSettings?.textColor || '#ffffff')
+            : (headerSettings?.textColor || '#ffffff')
     }
 
     // Header Arka Plan Mantığı

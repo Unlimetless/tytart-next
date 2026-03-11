@@ -31,6 +31,13 @@ export default {
             initialValue: '#ffffff'
         },
         {
+            name: 'stickyTextColor',
+            title: 'Sabit Menü Yazı Rengi',
+            type: 'string',
+            description: 'Sayfa aşağı kaydırıldığında yazıların alacağı renk.',
+            initialValue: '#ffffff'
+        },
+        {
             name: 'whatsappIcon',
             title: 'WhatsApp İkonu (Özel)',
             type: 'image',
