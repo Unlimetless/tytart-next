@@ -85,6 +85,7 @@ const Navbar = ({ menuItems, settings, styling, headerSettings }: {
                         src={logoUrl}
                         alt={settings?.title || "TytArt"}
                         fill
+                        sizes="(max-width: 768px) 150px, 200px"
                         className="object-contain transition-all duration-300"
                         priority
                     />
@@ -96,6 +97,7 @@ const Navbar = ({ menuItems, settings, styling, headerSettings }: {
                             src={urlFor(scrolled ? (logoSticky || logoMobile) : logoMobile).url()}
                             alt={settings?.title || "TytArt"}
                             fill
+                            sizes="150px"
                             className="object-contain"
                             priority
                         />

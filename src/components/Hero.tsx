@@ -5,20 +5,25 @@ import { motion } from 'framer-motion'
 import { ArrowRight, ChevronRight } from 'lucide-react'
 import Link from 'next/link'
 import { urlFor } from '@/sanity/lib/image'
+import Image from 'next/image'
 
 const Hero = ({ data }: { data?: any }) => {
+    const heroImageUrl = data?.heroImage
+        ? urlFor(data.heroImage).url()
+        : "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=2070";
+
     return (
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
             {/* Background with CMS Image */}
             <div className="absolute inset-0 z-0">
-                {data?.heroImage ? (
-                    <div
-                        className="w-full h-full bg-cover bg-center bg-no-repeat transition-transform duration-[10s] scale-110"
-                        style={{ backgroundImage: `url(${urlFor(data.heroImage).url()})` }}
-                    />
-                ) : (
-                    <div className="w-full h-full bg-[url('https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=2070')] bg-cover bg-center" />
-                )}
+                <Image
+                    src={heroImageUrl}
+                    alt={data?.heroTitle || "TytArt Hero"}
+                    fill
+                    priority
+                    sizes="100vw"
+                    className="object-cover transition-transform duration-[10s] scale-110"
+                />
                 <div className="absolute inset-0 bg-secondary/70 backdrop-blur-[2px]"></div>
                 <div className="absolute inset-0 bg-gradient-to-b from-secondary/40 via-transparent to-secondary"></div>
             </div>

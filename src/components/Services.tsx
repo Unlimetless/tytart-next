@@ -50,6 +50,7 @@ const Services = ({ services }: { services?: any[] }) => {
                                             src={urlFor(service.image).url()}
                                             alt={service.title}
                                             fill
+                                            sizes="(max-width: 768px) 100vw, 33vw"
                                             className="object-cover"
                                         />
                                     </div>
